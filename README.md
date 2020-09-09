@@ -1,3 +1,4 @@
+<h1>Note that your assets that is your csv files are stored in a directory called "assets"</h1>
 <h1>
 Setting up your environment
 </h1>
@@ -31,8 +32,10 @@ Go into your project folder using cmd and type "pip install -r requirements.txt"
 
 
 
+<h1>A. Running the tmppro.com scraper</h1>
 
-
-
+<h2>To run the scraper type "idle" in your windows search. When idle opens up, click on file > open. And open your main.py file. Once it opens up, press F5 to run the file.</h2>
+<p>
+Finally type main() to run the scraper, your results will automatically get saved in assets/products1.csv file. Make sure to not open that file while the scraper is running and instead copy the csv file to some other location and open that copy to check if the scraper is getting the correct data.
 
 
