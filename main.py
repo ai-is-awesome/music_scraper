@@ -21,10 +21,11 @@ def main(csv_file_location, start_index = None, end_index = None, ):
         start_index = 0
         
     if end_index == None:
-        end_index = len(df)
+        end_index = len(df) - 1
     
     
-    for i in range(start_index, end_index):
+    for i in range(start_index, end_index + 1):
+        print(i)
         try:
             row = df.iloc[i]
             product_url = row['product_url']
