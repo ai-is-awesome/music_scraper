@@ -1,3 +1,4 @@
+
 # -*- coding: utf-8 -*-
 """
 Created on Sat Sep  5 22:47:11 2020
@@ -8,15 +9,18 @@ Created on Sat Sep  5 22:47:11 2020
 
 import pandas as pd
 from product_scraper import get_product_details
-READ_FILE = 'assets/products1.csv'
 import traceback
 import time
 
 
 
+READ_FILE = 'assets/products1.csv'
+
 def main(csv_file_location, start_index = None, end_index = None, ):
     df = pd.read_csv(READ_FILE)
-    
+    if 'UPC / EAN:' in df.columns:
+        df['UPC / EAN:'] = df['UPC / EAN:'].astype('object')
+        
     if start_index == None:
         start_index = 0
         

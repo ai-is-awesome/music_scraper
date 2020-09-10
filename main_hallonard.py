@@ -6,8 +6,13 @@ Created on Thu Sep 10 02:37:24 2020
 """
 
 from halleonard_product_scraper import get_details
+import traceback
+import pandas as pd
+import time
 
 
+
+READ_FILE = 'assets/halleonard_products.csv'
 
 
 
@@ -18,19 +23,19 @@ def main(csv_file_location, start_index = None, end_index = None, ):
         start_index = 0
         
     if end_index == None:
-        end_index = len(df)
+        end_index = len(df) - 1
     
     
-    for i in range(start_index, end_index):
+    for i in range(start_index, end_index + 1):
+        print('Scraping ', str(i) + ' product.')
         try:
             row = df.iloc[i]
-            product_url = row['product_url']
-            details = get_product_details(product_url)
+            product_url = row['product_link']
+            details = get_details(product_url)
             for key in details.keys():
                 if key in df.columns:
                     df.loc[i, key] = details[key]
-        
-        
+            
         except:
             traceback.print_exc()
             
@@ -52,6 +57,7 @@ def main(csv_file_location, start_index = None, end_index = None, ):
         
     df.to_csv(READ_FILE)
                 
-                
     
-    
+
+
+

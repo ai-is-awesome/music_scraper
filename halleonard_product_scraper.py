@@ -1,4 +1,3 @@
-
 from requests_module import Request
 from bs4 import BeautifulSoup
 bs = BeautifulSoup
@@ -42,8 +41,19 @@ def get_details(urlorsoup):
 
     D = dict()
     product = soup.find('div', class_ = 'col-product-detail')
+    found_image = False
+    image_div = soup.find('div', attrs = {'id' : 'product-detail-cover'})
+    if image_div:
+        if image_div.img:
+            D['high_quality_image_link'] = image_div.img.get('src')
+            found_image = True
+            
+            
+    if not found_image:
+        D['high_quality_image_link'] = None
+    
     D['series'] = is_text_in_tag(product.find_all('span'), 'Series:').text.replace('Series:', '') if is_text_in_tag(product.find_all('span'), 'Series:') else None
-    D['publisher'] = is_text_in_tag(soup.find_all('span'), 'Publisher: ').text.replace('Publisher', '') if is_text_in_tag(product.find_all('span'), 'Publisher:') else None
+    D['publisher'] = is_text_in_tag(soup.find_all('span'), 'Publisher:').text.replace('Publisher:', '') if is_text_in_tag(product.find_all('span'), 'Publisher:') else None
     D['format'] = is_text_in_tag(soup.find_all('span'), 'Format').text.replace('Format:', '') if is_text_in_tag(product.find_all('span'), 'Format:') else None
     temp = soup.find('div', class_ = 'col-product-detail-content')
     D['details'] = temp.text if temp else None
@@ -60,6 +70,5 @@ def get_details(urlorsoup):
 
 
 test_url = 'https://www.halleonard.com/product/296761/all-in-one-piano-lessons-book-a?subsiteid=1'
-
 
 
