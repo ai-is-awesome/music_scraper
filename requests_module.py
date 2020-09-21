@@ -24,9 +24,9 @@ class Request(object):
 
 
     @classmethod
-    def get(self, url):
+    def get(self, url, **kwargs):
         session = requests.session()
-        resp = session.get(url, headers = self.headers)
+        resp = session.get(url, headers = self.headers, **kwargs)
         num_tries = 1
         while resp.status_code != 200 and  num_tries < self.max_tries:
             resp = session.get(url, headers=  self.headers)

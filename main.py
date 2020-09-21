@@ -58,7 +58,7 @@ def main(csv_file_location, start_index = None, end_index = None, ):
                 pass
                     
         
-    df.to_csv(READ_FILE)
+    df.to_csv(READ_FILE, index = False)
                 
                 
 
